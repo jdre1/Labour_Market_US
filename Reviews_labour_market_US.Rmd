@@ -1,0 +1,111 @@
+---
+title: "Reviews_labour_market_US"
+author: "Jaroslaw Dremlik"
+date: "15/01/2022"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Labour market short analysis and visualisation
+
+### 1. load packages
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+### 2. Including Plots
+
+Download files and upload data frame
+```{r}
+path <-'C:/Main_folder/Source_files/R_source_file/Labour_Market_US/'
+files <- c('alldata.csv',
+           'fulltimeAL.csv',
+           'fulltimeAT.csv',
+           'fulltimeBO.csv',
+           'fulltimeBOS.csv',
+           'fulltimeCHI.csv',
+           'fulltimeDC.csv',
+           'fulltimeLA.csv',
+           'fulltimeMA.csv',
+           'fulltimeMV.csv',
+           'fulltimeNY.csv',
+           'fulltimeRM.csv',
+           'fulltimeSD.csv',
+           'fulltimeSEA.csv',
+           'fulltimeSF.csv',
+           'fulltimeSU.csv'
+           )
+frame <- function(k){
+  #read.csv(paste(path, files[k], sep = ''),
+   #        na.strings = c('NA', 'NULL'))
+  return(read.csv(paste(path, files[k], sep = ''),
+                  na.strings = c('NA', 'NULL')))
+}
+df_all <- frame(1)
+```
+
+### Basic data frame statistical summary
+```{r}
+summary(df_all)
+```
+
+### 
+```{r}
+
+```
+
+### Plotting general view of job reviews
+```{r message=TRUE, warning=TRUE}
+cutting_into_breaks = cut(df_all$reviews, breaks = seq(from = 0, to = 500, by = 100))
+w = table(cutting_into_breaks)
+names(w) <- c('0 to 50', '100 to 150', '200 to 250', '300 to 350','400 to 450')
+plot(w, ylab = 'Number of rewiews', xlab = 'aaa', col = 'blue', lwd = 3)
+```
+
+### Number of reviews by city
+```{r}
+
+df_all$nowa <- strsplit(df_all$location, ',')
+
+```
+
+```{r}
+lista <- df_all$nowa
+
+```
+
+
+```{r}
+
+k = 0
+q = for(k in 1: length(lista)){
+
+  a = lista[[k]][[1]]
+
+}
+a
+```
+
+
+
+
+
+
+```{r}
+
+
+
+lista[[1]][[1]]
+
+
+
+```
+
+
+
+
