@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 library(ggplot2)
 library(tidyr)
+library(stringr)
 ```
 
 ### 2. Including Plots
@@ -54,9 +55,19 @@ df_all <- frame(1)
 summary(df_all)
 ```
 
-### 
+### Check NAs
 ```{r}
+is.na(df_all)
+```
 
+### Excluding NAs
+```{r}
+df_all <- na.omit(df_all)
+```
+
+### Chgecks NAs
+```{r}
+sum(is.na(df_all$reviews))
 ```
 
 ### Plotting general view of job reviews
@@ -67,45 +78,46 @@ names(w) <- c('0 to 50', '100 to 150', '200 to 250', '300 to 350','400 to 450')
 plot(w, ylab = 'Number of rewiews', xlab = 'aaa', col = 'blue', lwd = 3)
 ```
 
-### Number of reviews by city
+### Extracting and adding new variable City do set of data frame named City
 ```{r}
-
-df_all$nowa <- strsplit(df_all$location, ',')
-
+city_1 <- str_split_fixed(df_all$location, ',', 2)
+city_1
+city_2 <- city_1[,-2]
+city_2
+df_all$city <- city_2
 ```
 
+### Extracting and adding new variable State do set of data frame named State
 ```{r}
-lista <- df_all$nowa
-
+state_2 <- city_1[,-1]
+state_2
+state_3 <- gsub(' ', '', state_2)
+state_3
+state_4 <- strtrim(state_3, 2)
+state_4
+df_all$state <- state_4
 ```
-
-
+### Plotting average of reviews by State in the US
 ```{r}
-
-k = 0
-q = for(k in 1: length(lista)){
-
-  a = lista[[k]][[1]]
-
-}
-a
+aver_state_reviews <- sort(tapply(df_all$reviews, df_all$state, mean), 
+                           decreasing = TRUE)
+barplot(aver_state_reviews, col='lightblue', xlab = 'States in the US')
+title('Average reviews per state in the US')
 ```
-
-
-
-
-
-
+### Plotting average of reviews by company TOP-5
 ```{r}
 
-
-
-lista[[1]][[1]]
-
-
+company <- sort(tapply(df_all$reviews, df_all$company, mean), decreasing = TRUE)
+company_top_5 <- head(company, 5)
+barplot(company_top_5, col = 'pink')
+title('Average reviews number by company TOP 5')
 
 ```
+### Plotting average of reviews by company BOTTON-5
+```{r}
+company <- sort(tapply(df_all$reviews, df_all$company, mean), decreasing = FALSE)
+company_bottom_5 <- head(company, 5)
+barplot(company_bottom_5, col = 'brown')
+title('Average reviews number by company BOTTOM 5')
 
-
-
-
+```
