@@ -42,8 +42,6 @@ files <- c('alldata.csv',
            'fulltimeSU.csv'
            )
 frame <- function(k){
-  #read.csv(paste(path, files[k], sep = ''),
-   #        na.strings = c('NA', 'NULL'))
   return(read.csv(paste(path, files[k], sep = ''),
                   na.strings = c('NA', 'NULL')))
 }
