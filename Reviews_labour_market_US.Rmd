@@ -9,7 +9,7 @@ output: word_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Labour market short analysis and visualisation
+## Labour market short analysis and visualisation excersize
 
 ### 1. load packages
 ```{r}
@@ -97,6 +97,7 @@ state_4 <- strtrim(state_3, 2)
 state_4
 df_all$state <- state_4
 ```
+
 ### Plotting average of reviews by State in the US
 ```{r}
 aver_state_reviews <- sort(tapply(df_all$reviews, df_all$state, mean), 
@@ -104,6 +105,7 @@ aver_state_reviews <- sort(tapply(df_all$reviews, df_all$state, mean),
 barplot(aver_state_reviews, col='lightblue', xlab = 'States in the US')
 title('Average reviews per state in the US')
 ```
+
 ### Plotting average of reviews by company TOP-5
 ```{r}
 
@@ -113,6 +115,7 @@ barplot(company_top_5, col = 'pink')
 title('Average reviews number by company TOP 5')
 
 ```
+
 ### Plotting average of reviews by company BOTTON-5
 ```{r}
 company <- sort(tapply(df_all$reviews, df_all$company, mean), decreasing = FALSE)
@@ -121,7 +124,7 @@ barplot(company_bottom_5, col = 'brown')
 title('Average reviews number by company BOTTOM 5')
 ```
 
-### Walmart average review by City
+### plotting Walmart average review by City
 ```{r}
 
 walmart <- df_all %>%
@@ -131,24 +134,11 @@ walmart <- df_all %>%
 walmart_cities <- walmart[,-2]
 
 ggplot(data = walmart_cities, aes(x=city, y=reviews, colour = state)) + 
-  geom_point(size = 5)
-```
-
-```{r}
-
-data_scientist <- df_all %>%
-  select(state, position, reviews) %>%
-  filter(position == 'Data Scientist') %>%
-  group_by(state) %>%
-  arrange(state, desc(state)) %>%
-  summarise(avg = sum(reviews))
-
-ggplot(data = data_scientist, aes(x=state, y=avg)) + 
-  geom_bar(stat = 'identity') + title('qqqqq')
+  geom_point(size = 5) + labs(title = 'Walmart average number of review by City')
 
 ```
 
-
+### plotting Top 5 companies with highetrs number of reviews
 ```{r}
 company_data_scientist <- df_all %>%
   select(company, position, reviews) %>%
@@ -157,16 +147,43 @@ company_data_scientist <- df_all %>%
 
 company_data_scientist
 company_data_scientist_mean <- sort(tapply(company_data_scientist$reviews, 
-                                           company_data_scientist$company, mean), 
+                                           company_data_scientist$company, sum), 
      decreasing = TRUE)
 
 top_5 <- head(company_data_scientist_mean, 5)
 top_5
 names(top_5) <- c('Amazon', 'SHMC', 'IBM', 'Verizon', 'ITL USA')
 barplot(top_5, ylab = 'Reviews', xlab = 'Company', col = 'darkred')
-title('Top five companies - reviews for pposition Data Scientist')
+title('Top five companies - reviews for position Data Scientist')
 
 ```
+
+
+### plotting Number of reviews for position "Data Scientist" by US state
+```{r}
+data_scientist_1 <- df_all %>%
+  select(state, position, reviews) %>%
+  filter(position == 'Data Scientist') %>%
+  group_by(state) %>%
+  arrange(state, desc(reviews)) %>%
+  summarise(reviews = sum(reviews)) 
+
+ggplot(data_scientist_1, aes(x=state, y=reviews)) + 
+  geom_col(col = 'black', fill = 'lightblue') +
+  theme_replace() + 
+  labs(x = 'states', y = 'reviews', 
+       title = 'Number of reviews of Data Scientist positions by US state')
+
+```
+
+### another plotting !!!
+```{r}
+
+
+
+
+```
+
 
 
 
@@ -174,4 +191,8 @@ title('Top five companies - reviews for pposition Data Scientist')
 
 
 
+
 ```
+
+
+
