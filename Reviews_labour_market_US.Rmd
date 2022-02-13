@@ -23,29 +23,35 @@ library(stringr)
 
 Download files and upload data frame
 ```{r}
-path <-'C:/Main_folder/Source_files/R_source_file/Labour_Market_US/'
-files <- c('alldata.csv',
-           'fulltimeAL.csv',
-           'fulltimeAT.csv',
-           'fulltimeBO.csv',
-           'fulltimeBOS.csv',
-           'fulltimeCHI.csv',
-           'fulltimeDC.csv',
-           'fulltimeLA.csv',
-           'fulltimeMA.csv',
-           'fulltimeMV.csv',
-           'fulltimeNY.csv',
-           'fulltimeRM.csv',
-           'fulltimeSD.csv',
-           'fulltimeSEA.csv',
-           'fulltimeSF.csv',
-           'fulltimeSU.csv'
-           )
-frame <- function(k){
-  return(read.csv(paste(path, files[k], sep = ''),
-                  na.strings = c('NA', 'NULL')))
-}
-df_all <- frame(1)
+
+# path <-'C:/Main_folder/Source_files/R_source_file/Labour_Market_US/'
+# files <- c('alldata.csv',
+#            'fulltimeAL.csv',
+#            'fulltimeAT.csv',
+#            'fulltimeBO.csv',
+#            'fulltimeBOS.csv',
+#            'fulltimeCHI.csv',
+#            'fulltimeDC.csv',
+#            'fulltimeLA.csv',
+#            'fulltimeMA.csv',
+#            'fulltimeMV.csv',
+#            'fulltimeNY.csv',
+#            'fulltimeRM.csv',
+#            'fulltimeSD.csv',
+#            'fulltimeSEA.csv',
+#            'fulltimeSF.csv',
+#            'fulltimeSU.csv'
+#            )
+# frame <- function(k){
+#   return(read.csv(paste(path, files[k], sep = ''),
+#                   na.strings = c('NA', 'NULL')))
+# }
+# 
+# df_all <- frame(1)
+
+
+frame <- read.csv('alldata.csv', sep=',')
+df_all <- frame
 ```
 
 ### Basic data frame statistical summary
