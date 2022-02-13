@@ -3,6 +3,8 @@ title: "Reviews_labour_market_US"
 author: "Jaroslaw Dremlik"
 date: "15/01/2022"
 output: word_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
