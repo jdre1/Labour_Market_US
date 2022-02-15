@@ -2,7 +2,7 @@
 
 The purpose of the file is to visualise some features on Data Science labour 
 market in the US, and to reveal some statistics regarding job market in the 
-10 states in the US. Job market fo positions related to Data Science.
+10 states in the US. Job market for positions related to Data Science.
 
 This exercise is supposed to increase knowledge and skills for using basic 
 features of aforementioned libraries.
