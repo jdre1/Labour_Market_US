@@ -71,17 +71,20 @@ is.na(df_all)
 df_all <- na.omit(df_all)
 ```
 
-### Chgecks NAs
+### Checks NAs
 ```{r}
 sum(is.na(df_all$reviews))
 ```
 
-### Plotting general view of job reviews
+### Plotting general view of job reviews, plot no.: 1
 ```{r message=TRUE, warning=TRUE}
-cutting_into_breaks = cut(df_all$reviews, breaks = seq(from = 0, to = 500, by = 100))
+cutting_into_breaks = cut(df_all$reviews, breaks = seq(from = 0, to = 500, 
+                                                       by = 100))
 w = table(cutting_into_breaks)
 names(w) <- c('0 to 50', '100 to 150', '200 to 250', '300 to 350','400 to 450')
-plot(w, ylab = 'Number of rewiews', xlab = 'aaa', col = 'blue', lwd = 3)
+plot(w, ylab = 'Number of rewiews', xlab = 'Breaks of frequency', col = 'blue', 
+     lwd = 3)
+title('General overview of number of job reviews')
 ```
 
 ### Extracting and adding new variable City do set of data frame named City
@@ -104,7 +107,7 @@ state_4
 df_all$state <- state_4
 ```
 
-### Plotting average of reviews by State in the US
+### Plotting average of reviews by State in the US, plot no.: 2
 ```{r}
 aver_state_reviews <- sort(tapply(df_all$reviews, df_all$state, mean), 
                            decreasing = TRUE)
@@ -112,7 +115,7 @@ barplot(aver_state_reviews, col='lightblue', xlab = 'States in the US')
 title('Average reviews per state in the US')
 ```
 
-### Plotting average of reviews by company TOP-5
+### Plotting average of reviews by company TOP-5, plot no.: 3
 ```{r}
 
 company <- sort(tapply(df_all$reviews, df_all$company, mean), decreasing = TRUE)
@@ -122,7 +125,7 @@ title('Average reviews number by company TOP 5')
 
 ```
 
-### Plotting average of reviews by company BOTTON-5
+### Plotting average of reviews by company BOTTON-5, plot no.: 4
 ```{r}
 company <- sort(tapply(df_all$reviews, df_all$company, mean), decreasing = FALSE)
 company_bottom_5 <- head(company, 5)
@@ -130,7 +133,7 @@ barplot(company_bottom_5, col = 'brown')
 title('Average reviews number by company BOTTOM 5')
 ```
 
-### plotting Walmart average review by City
+### plotting Walmart average review by City, plot no.: 5
 ```{r}
 
 walmart <- df_all %>%
@@ -144,7 +147,7 @@ ggplot(data = walmart_cities, aes(x=city, y=reviews, colour = state)) +
 
 ```
 
-### plotting Top 5 companies with highetrs number of reviews
+### plotting Top 5 companies with highetrs number of reviews, plot no.: 6
 ```{r}
 company_data_scientist <- df_all %>%
   select(company, position, reviews) %>%
@@ -165,7 +168,7 @@ title('Top five companies - reviews for position Data Scientist')
 ```
 
 
-### plotting Number of reviews for position "Data Scientist" by US state
+### plotting Number of reviews for position "Data Scientist" by US state, plot no.: 7
 ```{r}
 data_scientist_1 <- df_all %>%
   select(state, position, reviews) %>%
@@ -182,23 +185,28 @@ ggplot(data_scientist_1, aes(x=state, y=reviews)) +
 
 ```
 
-### another plotting !!!
+### ploting number of reviews main histogram all states in US, plot no.: 8
 ```{r}
+facets_state <- df_all %>%
+  select(reviews, state)
 
-
-
+ggplot(data=facets_state, aes(reviews)) + geom_histogram(color = 'green', 
+                                                         bins = 30)
 
 ```
 
+### ploting number of reviews histograms breakdown by state in US, plot no.: 9
+```{r}
+facets_state <- df_all %>%
+  select(reviews, state)
 
+ggplot(data=facets_state, aes(reviews)) + geom_histogram(color = 'red', 
+                                                         bins = 30) + facet_wrap(~state)
+```
 
 
 ```{r}
 
-
-
-
 ```
-
 
 
