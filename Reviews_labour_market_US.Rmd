@@ -115,7 +115,7 @@ barplot(aver_state_reviews, col='lightblue', xlab = 'States in the US')
 title('Average reviews per state in the US')
 ```
 
-### Plotting average of reviews by company TOP-5, plot no.: 3
+### Plotting average number of reviews by company TOP-5, plot no.: 3
 ```{r}
 
 company <- sort(tapply(df_all$reviews, df_all$company, mean), decreasing = TRUE)
@@ -125,7 +125,7 @@ title('Average reviews number by company TOP 5')
 
 ```
 
-### Plotting average of reviews by company BOTTON-5, plot no.: 4
+### Plotting no.: 3 -> Average number of reviews by company BOTTOM-5, plot no.: 4
 ```{r}
 company <- sort(tapply(df_all$reviews, df_all$company, mean), decreasing = FALSE)
 company_bottom_5 <- head(company, 5)
@@ -147,7 +147,8 @@ ggplot(data = walmart_cities, aes(x=city, y=reviews, colour = state)) +
 
 ```
 
-### plotting Top 5 companies with highetrs number of reviews, plot no.: 6
+### plotting TOP-5 companies with highest number of reviews for "Data Scientist" 
+position, plot no.: 6
 ```{r}
 company_data_scientist <- df_all %>%
   select(company, position, reviews) %>%
@@ -163,7 +164,7 @@ top_5 <- head(company_data_scientist_mean, 5)
 top_5
 names(top_5) <- c('Amazon', 'SHMC', 'IBM', 'Verizon', 'ITL USA')
 barplot(top_5, ylab = 'Reviews', xlab = 'Company', col = 'darkred')
-title('Top five companies - reviews for position Data Scientist')
+title('TOP-5 companies - reviews for position Data Scientist')
 
 ```
 
